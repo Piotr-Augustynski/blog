@@ -16,7 +16,13 @@
 </p>
 <p>
   <strong>Tags:</strong>
-  <%= @article.tags.join(" ") %>
+  <% @article.tags.each do |tag| %>
+    <%= link_to articles_path(q: tag), style: "margin-left: 4px" do %>
+      <span class="label label-info">
+        <%= tag %>
+      </span>
+    <% end %>
+  <% end %>
 </p>
 
 <%= render 'comments/form' %>
