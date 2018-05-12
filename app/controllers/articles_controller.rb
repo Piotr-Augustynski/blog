@@ -38,6 +38,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def sanitize_tags(text)
+    text.downcase.split.uniq
+  end
+
   private
 
   def article_params
