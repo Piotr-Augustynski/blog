@@ -1,6 +1,14 @@
 <h1>
   List of articles
 </h1>
+<%= form_tag articles_path, method: :get do %>
+  <div class="input-group">
+    <%= text_field_tag :q, "", class: "form-control" %>
+    <span class="input-group-btn">
+      <%= submit_tag "Search", class: "btn btn-default" %>
+    </span>
+  </div>
+<% end %>
 <h2><%= link_to "New article", new_article_path %></h2>
 <table class="table">
   <thead>
