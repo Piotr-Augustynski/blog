@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.build(comment_params)
+    @like = Like.find_or_initialize_by(article: @article, user: current_user)
 
     if @comment.save
       session[:commenter] = @comment.commenter
@@ -20,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   private
-  
+
   def comment_params
     params.require(:comment).permit(:commenter, :body)
   end
