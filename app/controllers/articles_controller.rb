@@ -3,7 +3,8 @@ class ArticlesController < ApplicationController
   before_action :authorize_article, only: %i[edit update destroy]
 
   def index
-    @articles = Article.all
+    # skopiowane z kaminari
+    @articles = Article.page(params[:page])
 
     @articles = Article
                 .where('? = any(tags)',
