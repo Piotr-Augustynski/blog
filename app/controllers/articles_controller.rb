@@ -3,12 +3,12 @@ class ArticlesController < ApplicationController
   before_action :authorize_article, only: %i[edit update destroy]
 
   def index
-    # skopiowane z kaminari
+    # Article.page(params[:page]) skopiowane z kaminari
     @articles = Article.page(params[:page])
 
     @articles = Article
                 .where('? = any(tags)',
-                        params[:q].downcase) if params[:q].present?
+                       params[:q].downcase) if params[:q].present?
   end
 
   def new
@@ -28,6 +28,7 @@ class ArticlesController < ApplicationController
 
   def show
     @comment = @article.comments.build(commenter: session[:commenter])
+    @like = Like.find_or_initialize_by(article: @article, user: current_user)
   end
 
   def edit; end
