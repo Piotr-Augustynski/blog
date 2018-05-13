@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     # Article.page(params[:page]) skopiowane z kaminari
     @articles = Article.page(params[:page])
 
-    @articles = Article
+    @articles = @articles
                 .where('? = any(tags)',
                        params[:q].downcase) if params[:q].present?
   end
@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(permitted_attributes(Article))
     @article.author = current_user
     if @article.save
       flash[:notice] = "Your article has been saved."
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update(article_params)
+    if @article.update(permitted_attributes(@article))
       redirect_to article_path(@article)
     else
       render 'edit'
@@ -48,20 +48,16 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def article_params
-    params.require(:article).permit(:title, :text, :tags)
-  end
+  # usuwamy po stworzeniu w article_policy metody permitted_attributes
+  # def article_params
+  #   params.require(:article).permit(:title, :text, :tags)
+  # end
 
   def find_article
     @article = Article.find(params[:id])
   end
 
   def authorize_article
-    if @article.author != current_user
-      flash[:alert] = 'This is not your article'
-      #redirect_to = prezkierownie
-      redirect_to articles_path
-    end
+    authorize @article
   end
 end
