@@ -2,6 +2,8 @@ class Article < ApplicationRecord
   belongs_to :author, class_name: 'User'
   validates :title, presence: true, length: { minimum: 5 }
   has_many :comments, dependent: :destroy
+  has_many :likes
+  has_many :users, through: :likes
 
   def tags=(value)
     value = sanitize_tags(value) if value.is_a?(String)
