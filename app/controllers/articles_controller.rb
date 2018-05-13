@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :find_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all
-    if params[:q].present?
-      @articles = Article.where("? = any(tags)", params[:q].downcase)
-    end
+
+    @articles = Article
+                .where('? = any(tags)',
+                      params[:q].downcase) if params[:q].present?
   end
 
   def new
@@ -27,8 +28,7 @@ class ArticlesController < ApplicationController
     @comment = @article.comments.build(commenter: session[:commenter])
   end
 
-  def edit
-  end
+  def edit; end
 
   def destroy
     @article.destroy

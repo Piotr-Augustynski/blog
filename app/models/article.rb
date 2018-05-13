@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  belongs_to :author, class_name: "User"
+  belongs_to :author, class_name: 'User'
   validates :title, presence: true, length: { minimum: 5 }
   has_many :comments, dependent: :destroy
 
@@ -9,6 +9,7 @@ class Article < ApplicationRecord
   end
 
   private
+
   def sanitize_tags(text)
     text.downcase.split.uniq
   end
