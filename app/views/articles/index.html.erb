@@ -31,11 +31,16 @@
       <td><%= article.author.email %></td>
       <td>Comments: <%= article.comments.count %>
       <td><%= link_to "Show", article_path(article), class: "btn btn-info" %></td>
-      <td><%= link_to "Edit", edit_article_path(article), class: "btn btn-warning" %></td>
-      <td><%= link_to "Destroy", article_path(article),
-              class: "btn btn-danger",
-              method: :delete,
-              data: {confirm: "Are you sure?"} %></td>
+      <% if article.author == current_user %>
+        <td><%= link_to "Edit", edit_article_path(article), class: "btn btn-warning" %></td>
+        <td><%= link_to "Destroy", article_path(article),
+                class: "btn btn-danger",
+                method: :delete,
+                data: {confirm: "Are you sure?"} %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
     </tr>
     <% end %>
 </tbody>

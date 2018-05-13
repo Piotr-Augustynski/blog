@@ -1,12 +1,13 @@
 class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show edit update destroy]
+  before_action :authorize_article, only: %i[edit update destroy]
 
   def index
     @articles = Article.all
 
     @articles = Article
                 .where('? = any(tags)',
-                      params[:q].downcase) if params[:q].present?
+                        params[:q].downcase) if params[:q].present?
   end
 
   def new
@@ -52,5 +53,13 @@ class ArticlesController < ApplicationController
 
   def find_article
     @article = Article.find(params[:id])
+  end
+
+  def authorize_article
+    if @article.author != current_user
+      flash[:alert] = 'This is not your article'
+      #redirect_to = prezkierownie
+      redirect_to articles_path
+    end
   end
 end

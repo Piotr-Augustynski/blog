@@ -10,13 +10,21 @@ AllCops:
     - 'test/**/*'
 Bundler/OrderedGems:
   Enabled: false
+
 Style/Documentation:
   Enabled: false
+
 Style/Encoding:
   Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
+
 Style/MultilineIfModifier:
   Enabled: false
+
 Metrics/LineLength:
   Max: 120
+
+Style/GuardClause:
+  Enabled: false
