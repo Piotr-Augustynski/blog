@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(permitted_attributes(Article))
     @article.author = current_user
     if @article.save
-      flash[:notice] = "Your article has been saved."
+      flash[:notice] = 'Your article has been saved.'
       redirect_to article_path(@article)
     else
       render 'new'
@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flash[:notice] = "Your article has been deleted."
+    flash[:notice] = 'Your article has been deleted.'
     redirect_to articles_path
   end
 
@@ -48,6 +48,7 @@ class ArticlesController < ApplicationController
   end
 
   private
+
   # usuwamy po stworzeniu w article_policy metody permitted_attributes
   # def article_params
   #   params.require(:article).permit(:title, :text, :tags)

@@ -39,7 +39,7 @@
       <td>
         <% if policy(article).destroy? %>
           <%= link_to "Destroy", edit_article_path(article),
-            class: "btn btn-warning",
+            class: "btn btn-danger",
             method: :delete,
             data: {confirm: "Are you sure?"} %></td>
         <% end %>
