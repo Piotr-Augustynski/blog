@@ -16,6 +16,11 @@
     <%= f.text_field :tags, class: "form-control", placeholder:"Tags"%>
   </div>
 
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
   <p>
     <%= f.submit class: "btn btn-default" %>
   </p>

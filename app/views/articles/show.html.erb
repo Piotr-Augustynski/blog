@@ -19,6 +19,14 @@
   <%= @article.author.email %>
 </p>
 <p>
+  <strong>Image:</strong><br>
+  <% if @article.image? %>
+    <%= image_tag (@article.image.url) %>
+  <% else %>
+    <p>Brak zdj!</p>
+  <% end %>
+</p>
+<p>
   <strong>Tags:</strong>
   <% @article.tags.each do |tag| %>
     <%= link_to articles_path(q: tag), style: "margin-left: 4px" do %>

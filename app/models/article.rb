@@ -4,6 +4,7 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes
   has_many :users, through: :likes
+  mount_uploader :image, ImageUploader
 
   def tags=(value)
     value = sanitize_tags(value) if value.is_a?(String)
