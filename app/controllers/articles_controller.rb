@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :find_article, only: %i[show edit update destroy]
+  before_action :find_article, only: %i[show edit update destroy likes_summary]
   before_action :authorize_article, only: %i[edit update destroy]
 
   def index
@@ -43,6 +43,8 @@ class ArticlesController < ApplicationController
       end
     end
   end
+
+  def likes_summary; end
 
   def edit; end
 
