@@ -1,0 +1,7 @@
+Cloudinary.config do |config|
+  config.cloud_name = 'name'
+  config.api_key = 'key'
+  config.api_secret = 'secret_key'
+  config.secure = true
+  config.cdn_subdomain = true
+end
