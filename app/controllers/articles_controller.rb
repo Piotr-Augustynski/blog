@@ -29,6 +29,19 @@ class ArticlesController < ApplicationController
   def show
     @comment = @article.comments.build(commenter: session[:commenter])
     @like = Like.find_or_initialize_by(article: @article, user: current_user)
+
+    respond_to do |format|
+      format.html do
+        render
+      end
+      format.json do
+        render json:{
+          id: @article.id,
+          likes: @article.likes.count,
+          comments: @article.comments.count
+        };
+      end
+    end
   end
 
   def edit; end
