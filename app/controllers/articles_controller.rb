@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   def index
     # Article.page(params[:page]) skopiowane z kaminari
-    @articles = Article.page(params[:page])
+    @articles = Article.includes(:author).order(created_at: :desc).page(params[:page])
 
     @articles = @articles
                 .where('? = any(tags)',
@@ -37,8 +37,8 @@ class ArticlesController < ApplicationController
       format.json do
         render json:{
           id: @article.id,
-          likes: @article.likes.count,
-          comments: @article.comments.count
+          likes: @article.likes_count,
+          comments: @article.comments_count
         };
       end
     end

@@ -30,7 +30,7 @@
       <td><%= article.title %></td>
       <td><%= article.text %></td>
       <td><%= article.author.email %></td>
-      <td id="summary-<%= article.id %>">Comments: <%= article.comments.count %></td>
+      <td id="summary-<%= article.id %>">Comments: <%= article.comments_count %></td>
       <td><%= link_to "Summary", article_path(article, format: :json), class: "btn btn-info summary" %></td>
       <td><%= link_to "Show", article_path(article), class: "btn btn-info" %></td>
       <td>
