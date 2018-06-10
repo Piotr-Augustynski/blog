@@ -19,6 +19,10 @@
   <%= @article.author.email %>
 </p>
 <p>
+  <strong> Views count:</strong>
+  <%= @article.views_count %>
+</p>
+<p>
   <strong>Image:</strong><br>
   <% if @article.image? %>
     <%= image_tag (@article.image.url) %>
