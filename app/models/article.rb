@@ -5,6 +5,7 @@ class Article < ApplicationRecord
   has_many :likes
   has_many :users, through: :likes
   mount_uploader :image, ImageUploader
+  scope :top_commented, -> {order(comments_count: :desc).limit(1)}
 
   def tags=(value)
     value = sanitize_tags(value) if value.is_a?(String)

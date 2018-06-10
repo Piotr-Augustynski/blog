@@ -9,6 +9,8 @@
     </span>
   </div>
 <% end %>
+<h1>Top commented !!</h1>
+<%= link_to @top_commented_article.title, article_path(@top_commented_article.id) %>
 <h2><%= link_to "New article", new_article_path %></h2>
 <table class="table">
   <thead>
