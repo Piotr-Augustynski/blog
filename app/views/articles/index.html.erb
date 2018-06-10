@@ -1,24 +1,30 @@
 <h1>
   List of articles
 </h1>
-<%= form_tag articles_path, method: :get do %>
-  <div class="input-group">
-    <%= text_field_tag :q, "", class: "form-control" %>
-    <span class="input-group-btn">
-      <%= submit_tag "Search", class: "btn btn-default" %>
-    </span>
-  </div>
+<%= search_form_for @q do |f| %>
+  <%= f.label :title_cont %>
+  <%= f.search_field :title_cont %>
+
+  <%= f.label :text_cont %>
+  <%= f.search_field :text_cont %>
+
+  <%= f.label :author_id_eq %>
+  <%= f.select :author_id_eq, options_from_collection_for_select(User.all, "id", "email", @q.author_id_eq), include_blank: true %>
+
+  <%= f.submit %>
 <% end %>
+
+
 <h1>Top commented !!</h1>
 <%= link_to @top_commented_article.title, article_path(@top_commented_article.id) %>
 <h2><%= link_to "New article", new_article_path %></h2>
 <table class="table">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Text</th>
-      <th>Author</th>
+      <th><%= sort_link(@q, :id) %></th>
+      <th><%= sort_link(@q, :title) %></th>
+      <th><%= sort_link(@q, :text) %></th>
+      <th><%= sort_link(@q, :author) %></th>
       <th></th>
       <th></th>
       <th></th>
