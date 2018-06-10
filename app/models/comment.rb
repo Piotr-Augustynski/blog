@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
   belongs_to :article, counter_cache: true
   validates :commenter, presence: true, email: true
-  validates :body, presence: true, inclusion: { in: 6..500 }
+  validates :body, presence: true, length: { in: 6..5000 }
 end
